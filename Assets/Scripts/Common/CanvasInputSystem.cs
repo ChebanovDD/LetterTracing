@@ -11,19 +11,19 @@ namespace Common
         [SerializeField] private EventTrigger _eventTrigger;
 
         public event EventHandler<Vector2> MouseDown;
-        public event EventHandler<Vector2> MouseDrag;
+        public event EventHandler<Vector2> MouseMove;
         public event EventHandler<Vector2> MouseUp;
 
         private void Awake()
         {
             var pointerDown = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
-            pointerDown.callback.AddListener(data => { OnPointerDown((PointerEventData)data); });
+            pointerDown.callback.AddListener(data => { OnPointerDown((PointerEventData) data); });
 
             var drag = new EventTrigger.Entry { eventID = EventTriggerType.Drag };
-            drag.callback.AddListener(data => { OnPointerDrag((PointerEventData)data); });
+            drag.callback.AddListener(data => { OnPointerDrag((PointerEventData) data); });
 
             var pointerUp = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
-            pointerUp.callback.AddListener(data => { OnPointerUp((PointerEventData)data); });
+            pointerUp.callback.AddListener(data => { OnPointerUp((PointerEventData) data); });
 
             _eventTrigger.triggers.Add(pointerDown);
             _eventTrigger.triggers.Add(drag);
@@ -37,7 +37,7 @@ namespace Common
 
         private void OnPointerDrag(PointerEventData e)
         {
-            MouseDrag?.Invoke(this, GetWorldPosition(e.position));
+            MouseMove?.Invoke(this, GetWorldPosition(e.position));
         }
 
         private void OnPointerUp(PointerEventData e)

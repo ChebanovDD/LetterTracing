@@ -3,7 +3,6 @@ using Common.Enums;
 using Common.Interfaces;
 using Common.Models;
 using Common.ScriptableObjects;
-using Common.ViewModels;
 using UnityEngine;
 
 namespace LineRendererImplementation

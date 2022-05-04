@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace Common.ViewModels
+namespace LineRendererImplementation
 {
     public class NumberIndicator : MonoBehaviour
     {

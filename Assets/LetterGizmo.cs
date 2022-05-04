@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System.Linq;
+using Common;
 using Common.Enums;
 using Common.Models;
 using Common.ScriptableObjects;
@@ -49,7 +50,7 @@ public class LetterGizmo : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (_letterData == null)
+        if (CanDrawLetter(_letterData) == false)
         {
             return;
         }
@@ -76,6 +77,22 @@ public class LetterGizmo : MonoBehaviour
                 Handles.DrawLine(segment.StartPoint, segment.EndPoint);
             }
         }
+    }
+
+    private bool CanDrawLetter(LetterData letterData)
+    {
+        if (letterData == null || letterData.Strokes == null)
+        {
+            return false;
+        }
+
+        var stroke = letterData.Strokes.FirstOrDefault();
+        if (stroke == null)
+        {
+            return false;
+        }
+
+        return stroke.Points != null && stroke.Points.Length != 0;
     }
 
     private Segment[] GenerateLineSegments(Vector2[] points)
